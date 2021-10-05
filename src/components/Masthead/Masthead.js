@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaBars, FaArrowRight } from "react-icons/fa";
+import useWindowDimensions from "../../hooks/WindowDimensions";
 import "./Masthead.css";
 
 const Masthead = () => {
+    const [menuActive, setMenuActive] = useState(false);
+    const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+
+    const menuTriggerHandler = () => {
+        menuActive ? setMenuActive(false) : setMenuActive(true);
+    };
+
+    useEffect(() => {
+        windowWidth >= 768 && setMenuActive(false);
+    }, [windowWidth]);
+
     return (
         <div className="">
             <div className="flex py-3 px-4 md:px-6 md:py-6 items-center justify-between md:flex-start md:justify-normal bg-grey-900">
-                <FaBars className="md:hidden text-grey-50 text-2xl font-light cursor-pointer hover:text-cyan-500 transition duration-300"></FaBars>
+                <FaBars
+                    onClick={menuTriggerHandler}
+                    className="md:hidden text-grey-50 text-2xl font-light cursor-pointer"
+                ></FaBars>
                 <a className="ml-4 md:ml-0 md:mr-8" href="/">
                     <img
                         src="https://via.placeholder.com/128x32/00bcd4/000"
@@ -62,7 +77,11 @@ const Masthead = () => {
                     Contact
                 </a>
             </div>
-            <div className="mobile-nav md:hidden px-4 bg-grey-100 pt-5 font-semibold">
+            <div
+                className={`${
+                    menuActive ? "opacity-100" : "opacity-0"
+                } mobile-nav md:hidden px-4 bg-grey-100 pt-5 font-semibold transition-opacity duration-300`}
+            >
                 <ul className="text-grey-900">
                     <li className="border-b border-black hover:border-cyan-500 transition transition-duration-300">
                         <a
