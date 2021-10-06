@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const MastheadBurger = (props) => {
-    const [isActive, setIsActive] = useState(false);
+    const [burgerIsActive, setBurgerIsActive] = useState(false);
 
     const clickHandler = () => {
-        isActive ? setIsActive(false) : setIsActive(true);
+        burgerIsActive ? setBurgerIsActive(false) : setBurgerIsActive(true);
 
-        props.isActive(isActive);
+        props.burgerIsActive(burgerIsActive);
     };
+
+    useEffect(() => {
+        !props.menuIsActive && setBurgerIsActive(false);
+    }, [props.menuIsActive]);
 
     return (
         <button
@@ -17,17 +21,17 @@ const MastheadBurger = (props) => {
         >
             <div
                 className={`${
-                    isActive && `transform translate-y-2 rotate-45`
+                    burgerIsActive && `transform translate-y-2 rotate-45`
                 } h-0.5 bg-grey-100 mb-1.5 transition`}
             ></div>
             <div
                 className={`${
-                    isActive ? `opacity-0` : `opacity-100`
+                    burgerIsActive ? `opacity-0` : `opacity-100`
                 } h-0.5 bg-grey-100 mb-1.5 transition`}
             ></div>
             <div
                 className={`${
-                    isActive && `transform -translate-y-2 -rotate-45`
+                    burgerIsActive && `transform -translate-y-2 -rotate-45`
                 } h-0.5 bg-grey-100 transition`}
             ></div>
         </button>
