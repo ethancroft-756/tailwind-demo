@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaBars, FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import useWindowDimensions from "../../hooks/WindowDimensions";
 import "./Masthead.css";
+import MastheadBurger from "./MastheadBurger";
 
 const Masthead = () => {
     const [menuActive, setMenuActive] = useState(false);
@@ -18,10 +19,7 @@ const Masthead = () => {
     return (
         <div className="">
             <div className="flex py-3 px-4 md:px-6 md:py-6 items-center justify-between md:flex-start md:justify-normal bg-grey-900">
-                <FaBars
-                    onClick={menuTriggerHandler}
-                    className="md:hidden text-grey-50 text-2xl font-light cursor-pointer"
-                ></FaBars>
+                <MastheadBurger onClick={menuTriggerHandler}></MastheadBurger>
                 <a className="ml-4 md:ml-0 md:mr-8" href="/">
                     <img
                         src="https://via.placeholder.com/128x32/00bcd4/000"
