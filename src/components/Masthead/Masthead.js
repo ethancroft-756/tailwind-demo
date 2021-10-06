@@ -19,6 +19,7 @@ const Masthead = () => {
     return (
         <div className="">
             <div className="flex py-3 px-4 md:px-6 md:py-6 items-center justify-between md:flex-start md:justify-normal bg-grey-900">
+                {/* Stop burger icon issue from resizing */}
                 <MastheadBurger isActive={menuTriggerHandler}></MastheadBurger>
                 <a className="ml-4 md:ml-0 md:mr-8" href="/">
                     <img
